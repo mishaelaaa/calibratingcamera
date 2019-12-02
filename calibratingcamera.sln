@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "calibratingcamera", "calibratingcamera\calibratingcamera.pyproj", "{52F66DE3-EBA8-45CB-8A74-035E6A1B20A8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52F66DE3-EBA8-45CB-8A74-035E6A1B20A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52F66DE3-EBA8-45CB-8A74-035E6A1B20A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9B86A0FC-68C1-4AC0-85F5-DA209C169366}
+	EndGlobalSection
+EndGlobal
