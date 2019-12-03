@@ -6,6 +6,7 @@ import pprint
 import numpy as np
 import cv2
 from scipy import optimize as opt
+
 #python 2 -> xrange
 #python 3 -> range
 xrange = range
