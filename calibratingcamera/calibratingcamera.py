@@ -24,7 +24,8 @@ def show_image(string, image):
     cv2.waitKey()
 
 def get_camera_images():
-    images = [each for each in glob.glob(DATA_DIR + "left15.jpg")]
+    #images = [each for each in glob.glob(DATA_DIR + "*.jpg")]
+    images = [each for each in glob.glob(DATA_DIR + "nz_brat.png")]
     images = sorted(images)
     for each in images:
         yield (each, cv2.imread(each, 0))
