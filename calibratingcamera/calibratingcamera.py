@@ -7,8 +7,11 @@ import numpy as np
 import cv2
 from scipy import optimize as opt
 
-#python 2 -> xrange
-#python 3 -> range
+'''
+python 2 -> xrange
+python 3 -> range
+'''
+
 xrange = range
 
 np.set_printoptions(suppress=True)
@@ -31,7 +34,6 @@ def get_camera_images():
         yield (each, cv2.imread(each, 0))
     # yield [(each, cv2.imread(each, 0)) for each in images]
 
-
 def getChessboardCorners(images = None, visualize=False):
     objp = np.zeros((PATTERN_SIZE[1]*PATTERN_SIZE[0], 3), dtype=np.float64)
     # objp[:,:2] = np.mgrid[0:PATTERN_SIZE[1], 0:PATTERN_SIZE[0]].T.reshape(-1, 2)
@@ -43,6 +45,7 @@ def getChessboardCorners(images = None, visualize=False):
     object_points = []
     correspondences = []
     ctr=0
+
     for (path, each) in get_camera_images(): #images:
         print("Processing Image : ", path)
         ret, corners = cv2.findChessboardCorners(each, patternSize=PATTERN_SIZE)
@@ -63,7 +66,6 @@ def getChessboardCorners(images = None, visualize=False):
                 cv2.drawChessboardCorners(ec, PATTERN_SIZE, corners, ret)
                 cv2.imwrite(DEBUG_DIR + str(ctr)+".png", ec)
                 # show_image("mgri", ec)
-                # 
         else:
             print ("Error in detection points", ctr)
 
@@ -124,7 +126,6 @@ def normalize_points(chessboard_correspondences):
         normalized_imp = normalized_imp[:,:-1]
 
         # print(normalized_imp)
-
         ret_correspondences.append((imp, objp, normalized_imp, normalized_objp, N_u, N_x, N_u_inv, N_x_inv))
 
     return ret_correspondences
@@ -141,8 +142,6 @@ def compute_view_based_homography(correspondence, reproj = False):
     N_x = correspondence[5]
     N_u_inv = correspondence[6]
     N_x_inv = correspondence[7]
-
-
 
     N = len(image_points)
     print("Number of points in current view : ", N)
@@ -165,9 +164,7 @@ def compute_view_based_homography(correspondence, reproj = False):
         M[(2*i) + 1] = row_2
 
         print ("p_model {0} \t p_obs {1}".format((X, Y), (u, v)))
-
-
-
+               
     # M.h  = 0 . solve system of linear equations using SVD
     u, s, vh = np.linalg.svd(M)
     print("Computing SVD of M")
@@ -186,8 +183,7 @@ def compute_view_based_homography(correspondence, reproj = False):
     
     # if abs(h[2, 2]) > 10e-8:
     h = h[:,:]/h[2, 2]
-
-
+    
     print("Homography for View : \n", h )
 
     if reproj:
@@ -203,8 +199,6 @@ def compute_view_based_homography(correspondence, reproj = False):
         print("Reprojection error : ", reproj_error)
 
     return h
-
-
 
 def minimizer_func(initial_guess, X, Y, h, N):
     # X : normalized object points flattened
@@ -228,7 +222,6 @@ def minimizer_func(initial_guess, X, Y, h, N):
     # return projected
     return (np.abs(projected - Y))**2
         
-
 def jac_function(initial_guess, X, Y, h, N):
     x_j = X.reshape(N, 2)
     jacobian = np.zeros( (2*N, 9) , np.float64)
@@ -241,7 +234,6 @@ def jac_function(initial_guess, X, Y, h, N):
         jacobian[2*j + 1] = np.array([0, 0, 0, x/w, y/w, 1/w, -sy*x/w**2, -sy*y/w**2, -sy/w**2])
 
     return jacobian
-
 
 def refine_homographies(H, correspondences, skip=False):
     if skip:
@@ -261,13 +253,11 @@ def refine_homographies(H, correspondences, skip=False):
     Y = image_points.flatten()
     h = H.flatten()
     h_prime = opt.least_squares(fun=minimizer_func, x0=h, jac=jac_function, method="lm" , args=[X, Y, h, N], verbose=0)
-
-    
+        
     if h_prime.success:
         H =  h_prime.x.reshape(3, 3)
     H = H/H[2, 2]
     return H
-
 
 def get_intrinsic_parameters(H_r):
     M = len(H_r)
@@ -319,13 +309,8 @@ def get_intrinsic_parameters(H_r):
     print(A)
     return A
 
-
-
 # images = get_camera_images()
-
 chessboard_correspondences = getChessboardCorners(images=None, visualize = True)
-      
-
 chessboard_correspondences_normalized = normalize_points(chessboard_correspondences)
 
 print("M = ", len(chessboard_correspondences_normalized), " view images")
