@@ -6,6 +6,7 @@ import pprint
 import numpy as np
 import cv2
 from scipy import optimize as opt
+import matplotlib.pyplot as plt
 
 '''
 python 2 -> xrange
@@ -26,9 +27,11 @@ def show_image(string, image):
     cv2.imshow(string, image)
     cv2.waitKey()
 
+    #hqdefault.jpg, imageto.jpg, 
+
 def get_camera_images():
-    #images = [each for each in glob.glob(DATA_DIR + "*.jpg")]
-    images = [each for each in glob.glob(DATA_DIR + "nz_brat.png")]
+    images = [each for each in glob.glob(DATA_DIR + "*.jpg")]
+    #images = [each for each in glob.glob(DATA_DIR + "gavra*.jpg")]
     images = sorted(images)
     for each in images:
         yield (each, cv2.imread(each, 0))
@@ -327,4 +330,6 @@ for i in range(len(H)):
 
 A = get_intrinsic_parameters(H_r)
 
+
 cv2.destroyAllWindows()
+
