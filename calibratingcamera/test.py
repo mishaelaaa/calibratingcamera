@@ -18,9 +18,18 @@ xrange = range
 np.set_printoptions(suppress=True)
 puts = pprint.pprint
 
-DATA_DIR = "../data/Camera/"
-DEBUG_DIR = "../data/debug/"
+'''
+Different chess boards have different number of squares. 
+Please count how many squares the length and height of your 
+    board is composed and enter the values.
+'''
+
+DATA_DIR = "../data/9x6/"
+#DATA_DIR = "../data/8x5/"
+DEBUG_DIR = "../data/debug_9x6/"
+#DEBUG_DIR = "../data/debug_8x5/"
 PATTERN_SIZE = (9, 6)
+#PATTERN_SIZE = (8, 5)
 SQUARE_SIZE = 1.0 #
 
 def show_image(string, image):
@@ -317,7 +326,7 @@ chessboard_correspondences = getChessboardCorners(images=None, visualize = True)
 chessboard_correspondences_normalized = normalize_points(chessboard_correspondences)
 
 print("M = ", len(chessboard_correspondences_normalized), " view images")
-print("N = ", len(chessboard_correspondences_normalized[0][0]),  " points per image")
+print("N = ", len(chessboard_correspondences_normalized[0][0]), " points per image")
 
 H = []
 for correspondence in chessboard_correspondences_normalized:
