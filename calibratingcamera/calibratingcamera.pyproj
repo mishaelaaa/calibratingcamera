@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>52f66de3-eba8-45cb-8a74-035e6a1b20a8</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>calibratingcamera.py</StartupFile>
+    <StartupFile>__main__.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -27,7 +27,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="calibratingcamera.py" />
-    <Compile Include="test.py">
+    <Compile Include="module1.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="__main__.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
