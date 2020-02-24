@@ -18,9 +18,12 @@ xrange = range
 np.set_printoptions(suppress=True)
 puts = pprint.pprint
 
-DATA_DIR = "../data/"
-DEBUG_DIR = "../data/debug/"
+DATA_DIR = "../data/9x6/Logitech/"
+#DATA_DIR = "../data/8x5/"
+DEBUG_DIR = "../data/debug_9x6/Logitech/"
+#DEBUG_DIR = "../data/debug_8x5/"
 PATTERN_SIZE = (9, 6)
+#PATTERN_SIZE = (8, 5)
 SQUARE_SIZE = 1.0 #
 
 def show_image(string, image):
@@ -31,7 +34,7 @@ def show_image(string, image):
 
 def get_camera_images():
     images = [each for each in glob.glob(DATA_DIR + "*.jpg")]
-    #images = [each for each in glob.glob(DATA_DIR + "gavra*.jpg")]
+    #images = [each for each in glob.glob(DATA_DIR + "image41.jpg")]
     images = sorted(images)
     for each in images:
         yield (each, cv2.imread(each, 0))
